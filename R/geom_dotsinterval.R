@@ -217,20 +217,19 @@ makeContent.dots_grob = function(x) {
         guide_height = max(d[[ymax]] - d[[y]], d[[y]] - d[[ymin]])
         direction = switch_side(d$side, orientation, topright = 1, bottomleft = -1, both = 1)
         both_adjust = if (d$side == "both") 2 else 1
-        not_both = if (d$side == "both") 0 else 1
         max_count = guide_height / binwidth / heightratio * both_adjust + 1 - 1/stackratio
 
         # construct a viewport such that the guide drawn in this viewport
         # will have its data values at the correct locations
         vp = viewport(just = c(0, 0))
         vp[[x]] = unit(0, "native")
-        vp[[y]] = unit(d[[y]] + dot_height / 2 * not_both * direction, "native")
+        vp[[y]] = unit(d[[y]], "native")
         vp[[width.]] = unit(1, "npc")
-        vp[[height]] = unit(guide_height - dot_height / both_adjust, "native") * direction
+        vp[[height]] = unit(guide_height * direction, "native")
 
 
         grobTree(
-          subguide_fun(c(1, max_count), orientation = orientation),
+          subguide_fun(c(0, max_count), orientation = orientation),
           vp = vp
         )
       }
