@@ -38,11 +38,10 @@ test_that(".Deprecated_arguments works properly", {
 })
 
 
-# fct_rev_ ----------------------------------------------------------------
+# rev_order ----------------------------------------------------------------
 
-test_that("fct_rev_ works properly", {
-  expect_equal(fct_rev_(c("a","b","c")), factor(c("a","b","c"), levels = c("c","b","a")))
-  expect_error(fct_rev_(1:3), "must be a factor")
+test_that("rev_order works properly", {
+  expect_equal(rev_order(c("a","b","c")), ordered(c("a","b","c"), levels = c("c","b","a")))
 })
 
 

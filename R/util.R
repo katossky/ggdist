@@ -179,11 +179,15 @@ map_dfr_ = function(data, fun, ...) {
   vec_rbind(!!!lapply(data, fun, ...))
 }
 
-#' faster version of a map over rows of a data frame, like:
+#' Faster version of a map over rows of a data frame
+#'
+#' Similar to:
+#' ```r
 #' map_dfr(seq_len(nrow(data)), function(i) {
 #'   row = data[i, , drop = FALSE]
 #'   ...
 #' })
+#' ```
 #' @noRd
 row_map_dfr_ = function(data, fun, ...) {
   map_dfr_(seq_len(nrow(data)), function(row_i) {
@@ -254,13 +258,11 @@ map2_chr_ = function(.x, .y, .f) {
   vctrs::list_unchop(map2_(.x, .y, .f), ptype = character())
 }
 
-fct_rev_ = function(x) {
-  if (is.character(x)) {
-    x = factor(x)
-  } else if (!is.factor(x)) {
-    stop0("`x` must be a factor (or character vector).")
-  }
-  factor(x, levels = rev(levels(x)), ordered = is.ordered(x))
+#' Roughly equivalent to `forcats::fct_rev(ordered(x))`
+#' @noRd
+rev_order = function(x) {
+  x = ordered(x)
+  ordered(x, levels = rev(levels(x)))
 }
 
 

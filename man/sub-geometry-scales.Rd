@@ -161,7 +161,7 @@ passes arguments to \code{\link[ggplot2:scale_colour_discrete]{scale_color_discr
 
 \item{aesthetics}{<\link{character}> Names of aesthetics to set scales for.}
 
-\item{guide}{<\link[ggplot2:ggplot2-ggproto]{Guide} | \link[=character]{string}> Guide to use for legends for an aesthetic.}
+\item{guide}{<\link[ggplot2:Guide]{Guide} | \link[=character]{string}> Guide to use for legends for an aesthetic.}
 
 \item{range}{<length-2 \link{numeric}> The minimum and maximum size of the plotting symbol
 after transformation.}
@@ -187,7 +187,7 @@ If the purpose is to zoom, use the limit argument in the coordinate system
 \code{FALSE}?}
 }
 \value{
-A \link[ggplot2:ggplot2-ggproto]{ggplot2::Scale} representing one of the aesthetics used to target the appearance of specific parts of composite
+A \link[ggplot2:Scale]{ggplot2::Scale} representing one of the aesthetics used to target the appearance of specific parts of composite
 \code{ggdist} geoms. Can be added to a \code{\link[ggplot2:ggplot]{ggplot()}} object.
 }
 \description{

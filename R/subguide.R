@@ -235,7 +235,7 @@ subguide_spike = subguide_none
 
 # helpers -----------------------------------------------------------------
 
-#' Transform `position` into a numeric position in [0, 1]
+#' Transform `position` into a numeric position in `[0, 1]`
 #' @noRd
 get_subguide_position = function(position, orientation) {
   if (is.numeric(position)) {

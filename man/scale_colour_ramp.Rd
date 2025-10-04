@@ -73,7 +73,7 @@ If the purpose is to zoom, use the limit argument in the coordinate system
 values after the scale transformation. These values should be between \code{0}
 (the \code{from} color) and \code{1} (the color determined by the \code{fill} aesthetic).}
 
-\item{guide}{<\link[ggplot2:ggplot2-ggproto]{Guide} | \link[=character]{string}> A function used to create a guide or its name. For
+\item{guide}{<\link[ggplot2:Guide]{Guide} | \link[=character]{string}> A function used to create a guide or its name. For
 \code{\link[=scale_colour_ramp_continuous]{scale_colour_ramp_continuous()}} and \code{\link[=scale_fill_ramp_continuous]{scale_fill_ramp_continuous()}},
 \code{\link[=guide_rampbar]{guide_rampbar()}} can be used to create gradient color bars. See
 \code{\link[ggplot2:guides]{guides()}} for information on other guides.}
@@ -81,7 +81,7 @@ values after the scale transformation. These values should be between \code{0}
 \item{aesthetics}{<\link{character}> Names of aesthetics to set scales for.}
 }
 \value{
-A \link[ggplot2:ggplot2-ggproto]{ggplot2::Scale} representing a scale for the \code{colour_ramp} and/or \code{fill_ramp}
+A \link[ggplot2:Scale]{ggplot2::Scale} representing a scale for the \code{colour_ramp} and/or \code{fill_ramp}
 aesthetics for \code{ggdist} geoms. Can be added to a \code{\link[ggplot2:ggplot]{ggplot()}} object.
 }
 \description{

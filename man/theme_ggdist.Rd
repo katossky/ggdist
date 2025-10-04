@@ -62,7 +62,7 @@ theme_set(theme_ggdist())
 
 }
 \seealso{
-\code{\link[ggplot2:theme]{ggplot2::theme()}}, \code{\link[ggplot2:theme_get]{ggplot2::theme_set()}}
+\code{\link[ggplot2:theme]{ggplot2::theme()}}, \code{\link[ggplot2:get_theme]{ggplot2::theme_set()}}
 }
 \author{
 Matthew Kay

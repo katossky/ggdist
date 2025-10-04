@@ -14,7 +14,7 @@ rd_slabinterval_shortcut_geom = function(
 
   default_aes = lapply(geom$default_computed_aes, function(x) deparse0(get_expr(x)))
   default_aes = if (length(default_aes)) paste(names(default_aes), "=", default_aes, collapse = ", ")
-  default_aes = gsub("fct_rev_", "forcats::fct_rev", default_aes, fixed = TRUE)
+  default_aes = gsub("rev_order\\(([^\\)]+)\\)", "forcats::fct_rev(ordered(\\1))", default_aes)
 
   c(
     glue_doc('@title <<title_case(chart_type)>> plot (shortcut geom)'),

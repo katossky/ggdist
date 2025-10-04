@@ -56,7 +56,7 @@ that contains draws to summarize.
 dimension values of the curve.
 }}
 
-\item{...}{<bare \link{language}> Bare column names or expressions that, when evaluated in the context of
+\item{...}{<bare \link[tidyselect:language]{tidyselect::language}> Bare column names or expressions that, when evaluated in the context of
 \code{.data}, represent draws to summarize. If this is empty, then by default all
 columns that are not group columns and which are not in \code{.exclude} (by default
 \code{".chain"}, \code{".iteration"}, \code{".draw"}, and \code{".row"}) will be summarized.
@@ -151,7 +151,7 @@ df \%>\%
   ggtitle("50\% pointwise intervals with point_interval()") +
   theme_ggdist()
 
-\dontshow{if (requireNamespace("posterior", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("posterior", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # ... compare them to curvewise intervals
 df \%>\%
   group_by(x) \%>\%

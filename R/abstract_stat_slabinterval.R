@@ -207,7 +207,7 @@ AbstractStatSlabinterval = ggproto("AbstractStatSlabinterval", AbstractStat,
       i_data[[xmax]] = i_data$.upper
       i_data$.upper = NULL
 
-      i_data$level = fct_rev_(ordered(i_data$.width))
+      i_data$level = rev_order(i_data$.width)
       if (nrow(i_data) > 0) i_data$datatype = "interval"
 
       # INTERVAL INFO ADDED TO SLAB COMPONENT

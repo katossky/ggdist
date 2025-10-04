@@ -40,10 +40,10 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{geom}{<\link[ggplot2:ggplot2-ggproto]{Geom} | \link[=character]{string}> Use to override
+\item{geom}{<\link[ggplot2:Geom]{Geom} | \link[=character]{string}> Use to override
 the default connection between \code{\link[=stat_mcse_dots]{stat_mcse_dots()}} and \code{\link[=geom_blur_dots]{geom_blur_dots()}}}
 
-\item{position}{<\link[ggplot2:ggplot2-ggproto]{Position} | \link[=character]{string}> Position adjustment,
+\item{position}{<\link[ggplot2:Position]{Position} | \link[=character]{string}> Position adjustment,
 either as a string, or the result of a call to a position adjustment function.
 Setting this equal to \code{"dodge"} (\code{\link[ggplot2:position_dodge]{position_dodge()}}) or
 \code{"dodgejust"} (\code{\link[=position_dodgejust]{position_dodgejust()}}) can be useful if you have overlapping geometries.}
@@ -173,7 +173,7 @@ provide constraints on the bin width, you can pass a length-2 vector to \code{bi
 }
 \item{\code{subguide}}{<\link{function} | \link[=character]{string}> Sub-guide used to annotate the \code{thickness} scale. One of:
 \itemize{
-\item A function that takes a \code{scale} argument giving a \link[ggplot2:ggplot2-ggproto]{ggplot2::Scale}
+\item A function that takes a \code{scale} argument giving a \link[ggplot2:Scale]{ggplot2::Scale}
 object and an \code{orientation} argument giving the orientation of the
 geometry and then returns a \link[grid:grid.grob]{grid::grob} that will draw the axis
 annotation, such as \code{\link[=subguide_axis]{subguide_axis()}} (to draw a traditional axis) or
@@ -216,19 +216,21 @@ missing values are silently removed.}
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
 It can also be a named logical vector to finely select the aesthetics to
-display.}
+display. To include legend keys for all levels, even
+when no data exists, use \code{TRUE}.  If \code{NA}, all levels are shown in legend,
+but unobserved levels are omitted.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 
 \item{check.aes, check.param}{If \code{TRUE}, the default, will check that
 supplied parameters and aesthetics are understood by the \code{geom} or
 \code{stat}. Use \code{FALSE} to suppress the checks.}
 }
 \value{
-A \link[ggplot2:ggplot2-ggproto]{ggplot2::Stat} representing a blurry MCSE dot geometry which can
+A \link[ggplot2:Stat]{ggplot2::Stat} representing a blurry MCSE dot geometry which can
 be added to a \code{\link[ggplot2:ggplot]{ggplot()}} object.
 }
 \description{
@@ -495,7 +497,7 @@ Learn more about the sub-geom override aesthetics (like \code{interval_color}) i
 }
 
 \examples{
-\dontshow{if (getRversion() >= "4.1" && requireNamespace("posterior", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (getRversion() >= "4.1" && requireNamespace("posterior", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(dplyr)
 library(ggplot2)
 

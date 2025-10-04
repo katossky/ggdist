@@ -76,7 +76,10 @@ draw_key_lineribbon = function(self, data, params, size) {
   }
 
   fill_grob = if (!is.null(data$fill)) {
-    draw_key_rect(data, params, size)
+    fill_data = data
+    fill_data$colour = NULL
+    fill_data$linewidth = NULL
+    draw_key_polygon(fill_data, params, size)
   }
   line_grob = if (!is.null(data$colour)) {
     draw_key_path(data, params, size)
@@ -138,7 +141,7 @@ GeomLineribbon = ggproto("GeomLineribbon", AbstractGeom,
   ),
 
   default_computed_aes = aes(
-    fill = fct_rev_(ordered(.width))
+    fill = rev_order(.width)
   ),
 
   # support for `size` in place of `linewidth` aes in ggplot2 < 3.4

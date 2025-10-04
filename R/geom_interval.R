@@ -57,7 +57,7 @@ GeomInterval = ggproto("GeomInterval", GeomSlabinterval,
   ), GeomSlabinterval$default_key_aes),
 
   default_computed_aes = defaults(aes(
-    color = fct_rev_(ordered(.width))
+    color = rev_order(.width)
   ), GeomSlabinterval$default_computed_aes),
 
   hidden_aes = union(c(

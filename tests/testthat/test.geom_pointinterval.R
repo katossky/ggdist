@@ -64,7 +64,7 @@ test_that("grouped pointintervals work", {
     mean_qi(.width = c(.66, .95)) %>%
     ggplot(aes(
       x = i, y = u_tau, ymin = .lower, ymax = .upper,
-      interval_size = fct_rev_(ordered(.width))
+      interval_size = rev_order(.width)
     )) +
     geom_pointinterval(point_size = 3)
 
@@ -137,16 +137,16 @@ test_that("dist aesthetic can be NULLed out", {
   skip_if_no_vdiffr()
 
 
-  hist_df = tibble(
-    geom = "histinterval",
+  endpoints_df = tibble(
+    geom = "pointinterval",
     x = qnorm(ppoints(100), 4, 1),
     dist = NA
   )
 
   vdiffr::expect_doppelganger("dist aesthetic can be NULLed out",
-    hist_df %>%
+    endpoints_df %>%
       ggplot(aes(y = geom, dist = dist)) +
-      stat_pointinterval(aes(x = x, y = "pointinterval", dist = NULL))
+      stat_pointinterval(aes(x = x, dist = NULL))
   )
 })
 
