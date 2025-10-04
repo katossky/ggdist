@@ -47,7 +47,7 @@ system_os = function() tolower(Sys.info()[["sysname"]])
 #' non-mac platforms (since there are minor numerical variations due to this)
 #' @noRd
 variant_mac = function() {
-  if (system_os() == "darwin") "mac" else "not_mac"
+  if (system_os() == "darwin") "mac" else "not_mac"                      # nocov
 }
 
 #' update the mac snapshots in the package using the tests/_snaps folder from
@@ -55,12 +55,15 @@ variant_mac = function() {
 #' After a run on MacOS on Github CI, download the zip archive of the test
 #' output, extract it, and run this function on the _snap folder in the archive.
 #' @noRd
-update_mac_snapshots = function(mac_snap_folder = NULL) {
+update_mac_snapshots = function(mac_snap_folder = NULL) {          # nocov start
   if (is.null(mac_snap_folder)) {
     cli::cli_text("Downloading snapshots...")
     temp_folder = tempfile("mac_snaps")
     dir.create(temp_folder)
-    failure = system(paste0("gh run download --pattern macOS-*-testthat-snapshots --repo mjskay/ggdist --dir ", temp_folder))
+    failure = system(paste0(
+      "gh run download --pattern macOS-*-testthat-snapshots --repo mjskay/ggdist --dir ",
+      temp_folder
+    ))
     if (failure) stop("Could not download testthat snapshots")
     base_folder = list.dirs(temp_folder, recursive = FALSE)
     mac_snap_folder = file.path(base_folder, "ggdist.Rcheck", "tests", "testthat", "_snaps")
@@ -137,7 +140,7 @@ update_mac_snapshots = function(mac_snap_folder = NULL) {
   } else {
     cli::cli_text("No new snapshots\n")
   }
-}
+}                                                                    # nocov end
 
 
 # vdiffr writers ----------------------------------------------------------

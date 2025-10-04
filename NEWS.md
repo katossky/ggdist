@@ -21,6 +21,13 @@ Bug fixes:
 * `geom_lineribbon()` draw order now uses `median()` instead of `mean()` to
   determine order from the `order` aesthetic to be robust to infinities 
   (#255; thanks @damonbayer).
+* Key glyphs draw correctly again on ggplot2 4.0 (#262; thanks @mitchelloharawild
+  for pinpointing the solution).
+* Sub-geom color and fill scales now register theme elements for setting default
+  palettes using `ggplot2::register_theme_elements()`. This means that, just like
+  base `{ggplot2}` scales, the default palette for (e.g.) 
+  `scale_point_color_continuous()` can be set via 
+  `theme(palette.point_color.continuous = ...)`. This also fixes #263.
 
 
 # ggdist 3.3.3
