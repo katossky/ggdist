@@ -48,6 +48,11 @@ draw_key_slab_ = function(self, data, key_data, params, size) {
       # we need to reset the colour to its default
       s_key_data$colour = self$default_key_aes$colour
     }
+
+    # use old (pre-ggplot2 4) linewidth scaling behavior; properly speaking we
+    # should do something like https://github.com/tidyverse/ggplot2/pull/5815
+    # (TODO: would need to look into changing key glyph sizes to make that work)
+    s_key_data$linewidth = min(s_key_data$linewidth, min(size) / 4)
     draw_key_polygon(s_key_data, params, size)
   }
 }
