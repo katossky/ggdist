@@ -22,7 +22,7 @@ Depends:
     R (>= 4.0.0)
 Imports:
     grid,
-    ggplot2 (>= 3.5.0),
+    ggplot2 (>= 4.0.0),
     scales,
     rlang (>= 0.3.0),
     cli,
@@ -129,6 +129,7 @@ Collate:
     "weighted_hist.R"
     "weighted_quantile.R"
     "deprecated.R"
+    "zzz.R"
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 LinkingTo: 

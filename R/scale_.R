@@ -105,8 +105,9 @@
 #'   )
 #'
 #' @export
-scale_point_colour_discrete =
-  function(..., aesthetics = "point_colour") scale_colour_hue(..., aesthetics = aesthetics)
+scale_point_colour_discrete = function(..., aesthetics = "point_colour") {
+  scale_colour_discrete(..., aesthetics = aesthetics)
+}
 #' @rdname sub-geometry-scales
 #' @export
 scale_point_color_discrete = scale_point_colour_discrete
@@ -119,11 +120,11 @@ scale_point_colour_continuous = function(..., aesthetics = "point_colour", guide
 #' @export
 scale_point_color_continuous = scale_point_colour_continuous
 
-
 #' @rdname sub-geometry-scales
 #' @export
-scale_point_fill_discrete =
-  function(..., aesthetics = "point_fill") scale_colour_hue(..., aesthetics = aesthetics)
+scale_point_fill_discrete = function(..., aesthetics = "point_fill") {
+  scale_colour_discrete(..., aesthetics = aesthetics)
+}
 #' @rdname sub-geometry-scales
 #' @export
 scale_point_fill_continuous = function(..., aesthetics = "point_fill", guide = guide_colourbar2()) {
@@ -164,8 +165,9 @@ scale_point_size_discrete = function(..., range = c(1, 6), na.translate = FALSE)
 
 #' @export
 #' @rdname sub-geometry-scales
-scale_interval_colour_discrete =
-  function(..., aesthetics = "interval_colour") scale_colour_hue(..., aesthetics = aesthetics)
+scale_interval_colour_discrete = function(..., aesthetics = "interval_colour") {
+  scale_colour_discrete(..., aesthetics = aesthetics)
+}
 #' @rdname sub-geometry-scales
 #' @export
 scale_interval_color_discrete = scale_interval_colour_discrete
@@ -225,8 +227,9 @@ scale_interval_linetype_continuous = function(...) {
 
 #' @export
 #' @rdname sub-geometry-scales
-scale_slab_colour_discrete =
-  function(..., aesthetics = "slab_colour") scale_colour_hue(..., aesthetics = aesthetics)
+scale_slab_colour_discrete = function(..., aesthetics = "slab_colour") {
+  scale_colour_discrete(..., aesthetics = aesthetics)
+}
 #' @rdname sub-geometry-scales
 #' @export
 scale_slab_color_discrete = scale_slab_colour_discrete
@@ -242,8 +245,9 @@ scale_slab_color_continuous = scale_slab_colour_continuous
 
 #' @rdname sub-geometry-scales
 #' @export
-scale_slab_fill_discrete =
-  function(..., aesthetics = "slab_fill") scale_colour_hue(..., aesthetics = aesthetics)
+scale_slab_fill_discrete = function(..., aesthetics = "slab_fill") {
+  scale_colour_discrete(..., aesthetics = aesthetics)
+}
 #' @rdname sub-geometry-scales
 #' @export
 scale_slab_fill_continuous = function(..., aesthetics = "slab_fill", guide = guide_colourbar2()) {
@@ -320,6 +324,41 @@ scale_slab_shape_discrete = function(..., solid = TRUE) {
 scale_slab_shape_continuous = function(...) {
   stop0("A continuous variable cannot be mapped to shape")
 }
+
+
+# register default scale palettes -----------------------------------------
+
+#' Register new ggplot2 theme palettes for a scale
+#' @param palettes <character vector> The names of the palettes in the standard
+#' ggplot2 palette name format: `"palette.[scale_name].[discrete|continuous]"`
+#' @param default <character|function> Default palette for all `palettes`
+#' @param inherit <character vector> Names of elements all `palettes` inherit
+#' from (passed to `register_theme_elements(inherit = ...)`)
+#' @noRd
+register_theme_palettes = function(palettes, default, inherit) {
+  palette_defaults = rep(list(default), length(palettes))
+  names(palette_defaults) = palettes
+  palette_defs = rep(list(el_def(c("character", "function"), inherit)), length(palettes))
+  names(palette_defs) = palettes
+  register_theme_elements(!!!palette_defaults, element_tree = palette_defs)
+}
+
+rlang::on_load({
+  # currently we only use this mechanism for colour scales, but in principle
+  # we could do it for other scales too
+  scales = c("point_colour", "point_fill", "interval_colour", "slab_colour", "slab_fill")
+
+  register_theme_palettes(
+    palettes = paste0("palette.", scales, ".discrete"),
+    default = scales::pal_hue(),
+    inherit = "palette.colour.discrete"
+  )
+  register_theme_palettes(
+    palettes = paste0("palette.", scales, ".continuous"),
+    default = scales::pal_seq_gradient("#132B43", "#56B1F7"),
+    inherit = "palette.colour.continuous"
+  )
+})
 
 
 # guide_colorbar2 ---------------------------------------------------------
