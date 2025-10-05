@@ -3,6 +3,7 @@ url: https://mjskay.github.io/ggdist
 
 template:
   bootstrap: 5
+  math-rendering: mathjax
   params:
     ganalytics: UA-93322-5
   bslib:

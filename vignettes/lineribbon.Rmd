@@ -6,6 +6,7 @@ output:
   rmarkdown::html_vignette:
     toc: true
     df_print: kable
+    math_method: mathjax
 vignette: >
   %\VignetteIndexEntry{Lineribbon stats and geoms}
   %\VignetteEngine{knitr::rmarkdown}

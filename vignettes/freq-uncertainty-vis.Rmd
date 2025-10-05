@@ -6,6 +6,7 @@ output:
   rmarkdown::html_vignette:
     toc: true
     df_print: kable
+    math_method: mathjax
 vignette: >
   %\VignetteIndexEntry{Frequentist uncertainty visualization}
   %\VignetteEngine{knitr::rmarkdown}

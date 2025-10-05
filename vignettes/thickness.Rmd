@@ -6,6 +6,7 @@ output:
   rmarkdown::html_vignette:
     toc: true
     df_print: kable
+    math_method: mathjax
 vignette: >
   %\VignetteIndexEntry{Thickness scale}
   %\VignetteEngine{knitr::rmarkdown}
@@ -70,7 +71,7 @@ df %>%
   scale_y_discrete(expand = expansion(add = 0.1)) +
   scale_fill_brewer(palette = "Set2") +
   facet_grid(cols = vars(panel), labeller = "label_both") +
-  labs("geom_slab() with default thickness scaling") +
+  labs(title = "geom_slab() with default thickness scaling") +
   theme(
     legend.position = "bottom",
     panel.grid.major.y = element_line(color = "gray85"),
