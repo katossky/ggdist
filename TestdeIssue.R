@@ -3,9 +3,11 @@ library(devtools)
 library(dplyr)
 library(ggplot2)
 library(ggridges)
+library(gtable)
 
 devtools::load_all("../GGdist_issue_regler")
 devtools::load_all()
+library(ggdist)
 
 tibble(
   x = c( rgamma( 1e5 , 1^2 / 3^2 , 1 / 3^2 ),
