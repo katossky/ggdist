@@ -205,7 +205,7 @@ compute_slab_sample = function(
     x, n = n, adjust = adjust, trim = trim,
     breaks = breaks, align = align, outline_bars = outline_bars,
     weights = weights,
-    bounds = limits  # <-- Tu ajoutes ça ici
+    bounds = limits  # <-- Ce qu'on a rajouté
   )
   slab_df = data_frame0(
     .input = trans$inverse(d$x),
