@@ -18,11 +18,11 @@ tibble(
   geom_density(aes(x = x, colour = group)) + # comment out as needed
   geom_violin(aes(x = x, y = group)) +
   geom_density_ridges(aes(x = x, y = group),
-                      from = 0, to = 1) +
+                      from = 0, to = 0.5) +
   stat_slab(aes(x = x, y = group), height = 2,
-            limits = c(0, 1)) +
+            limits = c(0, 0.5)) +
   stat_eye(aes(x = x, y = group),
-           limits = c(0, 1), point_interval = NULL) +
-  scale_x_continuous(limits = c(0, 1),
+           limits = c(0, 0.5), point_interval = NULL) +
+  scale_x_continuous(limits = c(0, 0.5),
                      oob = scales::oob_keep) +
   theme_minimal()
