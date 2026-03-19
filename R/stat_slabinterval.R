@@ -213,6 +213,7 @@ compute_slab_sample = function(
     cdf = d$cdf %||% weighted_ecdf(x, weights = weights)(d$x)
   )
 
+  #blabla
   # extend x values to the range of the plot. To do that we have to include
   # x values requested from the original `input` if they are outside the
   # range of the slab
