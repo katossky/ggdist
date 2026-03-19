@@ -183,6 +183,9 @@ compute_slab_slabinterval = function(
 #' @importFrom stats density
 #' @importFrom graphics hist
 #' @noRd
+#' @param limits A numeric vector of length 2 defining the strict
+#' lower and upper bounds for the density estimation. Useful for
+#' bounded distributions (e.g., probabilities between 0 and 1).
 compute_slab_sample = function(
   x, scales, trans, input,
   slab_type, limits, n,
