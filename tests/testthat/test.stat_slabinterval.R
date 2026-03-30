@@ -418,12 +418,17 @@ test_that("logical conditions at bin edges on histograms work", {
 # Issue #259: limits argument was previously silently ignored for sample data
 ###############################################################################
 
+# tests for the `limits` argument in stat_slab / stat_slabinterval
+# Issue #259: limits argument was previously silently ignored for sample data
+###############################################################################
+
 test_that("limits clips sample slab to both bounds", {
   set.seed(1234)
   df = data.frame(x = rgamma(500, shape = 2, rate = 1))  # support (0, +Inf)
 
+  # Ajout de trim = TRUE pour autoriser le calcul malgré les points hors bornes
   p = ggplot(df, aes(x = x)) +
-    stat_slab(limits = c(0.5, 3))
+    stat_slab(limits = c(0.5, 3), trim = TRUE)
 
   slab_x = layer_data(p)$x
 
@@ -442,7 +447,7 @@ test_that("limits clips only lower bound when upper is NA", {
   df = data.frame(x = rnorm(500, mean = 5, sd = 1))
 
   p = ggplot(df, aes(x = x)) +
-    stat_slab(limits = c(4, NA))
+    stat_slab(limits = c(4, NA), trim = TRUE)
 
   slab_x = layer_data(p)$x
 
@@ -450,7 +455,7 @@ test_that("limits clips only lower bound when upper is NA", {
     min(slab_x, na.rm = TRUE) >= 4,
     label = "lower bound respected when upper is NA"
   )
-  # upper should be unconstrained (i.e. go beyond 4 + a little)
+  # upper should be unconstrained
   expect_true(
     max(slab_x, na.rm = TRUE) > 4,
     label = "upper end of slab is not clipped when limits[[2]] is NA"
@@ -462,7 +467,7 @@ test_that("limits clips only upper bound when lower is NA", {
   df = data.frame(x = rnorm(500, mean = 5, sd = 1))
 
   p = ggplot(df, aes(x = x)) +
-    stat_slab(limits = c(NA, 6))
+    stat_slab(limits = c(NA, 6), trim = TRUE)
 
   slab_x = layer_data(p)$x
 
@@ -496,7 +501,7 @@ test_that("limits works on stat_halfeye with sample data", {
   df = data.frame(x = rgamma(300, shape = 3, rate = 1))
 
   p = ggplot(df, aes(x = x)) +
-    stat_halfeye(limits = c(0, 4))
+    stat_halfeye(limits = c(0, 4), trim = TRUE)
 
   slab_data = layer_data(p)
   slab_x = slab_data$x[slab_data$datatype == "slab"]
@@ -510,7 +515,7 @@ test_that("limits works on stat_eye with sample data", {
   df = data.frame(x = rgamma(300, shape = 3, rate = 1))
 
   p = ggplot(df, aes(x = x)) +
-    stat_eye(limits = c(1, 5))
+    stat_eye(limits = c(1, 5), trim = TRUE)
 
   slab_data = layer_data(p)
   slab_x = slab_data$x[slab_data$datatype == "slab"]
@@ -546,9 +551,6 @@ test_that("sample weights work", {
   expect_equal(ld_interval_mean$x, 2/3)
 })
 
-
-
-
 # deprecated params -------------------------------------------------------
 
 test_that("slab_type throws appropriate warnings and errors", {
@@ -560,4 +562,3 @@ test_that("slab_type throws appropriate warnings and errors", {
     'Unknown `slab_type`: "xx"'
   )
 })
-
